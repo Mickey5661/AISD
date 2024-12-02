@@ -18,7 +18,7 @@ def main():
     insertion_sort_desc(arr)
 
     with open('output.txt', 'w') as f:
-        f.write(str(arr))
+        f.write(' '.join(map(str, arr)))
 
 if __name__ == '__main__':
     main()
