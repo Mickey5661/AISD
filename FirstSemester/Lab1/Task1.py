@@ -10,7 +10,6 @@ def insertion_sort(arr):
         arr[j + 1] = key
 
 def main():
-    # Чтение данных из файла input.txt
     with open('input.txt', 'r') as f:
         n = int(f.readline().strip())
         arr = list(map(int, f.readline().strip().split()))
@@ -18,7 +17,6 @@ def main():
     # Сортировка массива
     insertion_sort(arr)
 
-    # Запись отсортированного массива в файл output.txt
     with open('output.txt', 'w') as f:
         f.write(' '.join(map(str, arr)))
 
