@@ -12,7 +12,7 @@ def binary_search(arr, target):
 
 
 def main():
-    with open('input4.txt.txt', 'r') as f:
+    with open('input3.txt.txt', 'r') as f:
         n = int(f.readline())
         arr = list(map(int, f.readline().split()))
         k = int(f.readline())
