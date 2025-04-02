@@ -8,7 +8,6 @@ def simple_matrix_multiply(A, B):
                 C[i][j] += A[i][k] * B[k][j]
     return C
 
-
 # Метод Штрассена
 def strassen(A, B):
     n = len(A)

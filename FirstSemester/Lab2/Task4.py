@@ -10,7 +10,6 @@ def binary_search(arr, target):
             right = mid - 1
     return -1
 
-
 def main():
     with open('input3.txt.txt', 'r') as f:
         n = int(f.readline())
