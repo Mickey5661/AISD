@@ -1,19 +1,23 @@
 def selection_sort(arr):
-    n = len(arr)
-    for i in range(n-1):
+    for i in range(len(arr)):
         min_idx = i
-        for j in range(i+1, n):
+        for j in range(i+1, len(arr)):
             if arr[j] < arr[min_idx]:
                 min_idx = j
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    return arr
 
-with open('input.txt') as f:
-    arr = [int(line.strip()) for line in f]
+def main():
+    # Чтение данных из файла input.txt
+    with open('input.txt', 'r') as file:
+        n = int(file.readline().strip())
+        array = list(map(int, file.readline().strip().split()))
 
-# Сортировка
-sorted_arr = selection_sort(arr)
+    # Сортировка массива
+    selection_sort(array)
 
-with open('output.txt', 'w') as f:
-    for num in sorted_arr:
-        f.write(f"{num}\n")
+    # Запись отсортированного массива в файл output.txt
+    with open('output.txt', 'w') as file:
+        file.write(' '.join(map(str, array)))
+
+if __name__ == "__main__":
+    main()
