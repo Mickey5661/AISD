@@ -1,27 +1,29 @@
-def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
+def binary_search(array, target):
+    left, right = 0, len(array) - 1
     while left <= right:
         mid = (left + right) // 2
-        if arr[mid] == target:
+        if array[mid] == target:
             return mid
-        elif arr[mid] < target:
+        elif array[mid] < target:
             left = mid + 1
         else:
             right = mid - 1
     return -1
 
-def main():
-    with open('input3.txt.txt', 'r') as f:
-        n = int(f.readline())
-        arr = list(map(int, f.readline().split()))
-        k = int(f.readline())
-        targets = list(map(int, f.readline().split()))
+with open("input4.txt", "r") as infile:
+    a_line = infile.readline().split()
+    n = int(a_line[0])
+    a = list(map(int, a_line[1:n+1]))
 
-    results = [binary_search(arr, target) for target in targets]
+    b_line = infile.readline().split()
+    k = int(b_line[0])
+    b = list(map(int, b_line[1:k+1]))
 
-    with open('output4.txt', 'w') as f:
-        f.write(' '.join(map(str, results)))
+# Поиск каждого элемента из b в a
+results = []
+for number in b:
+    index = binary_search(a, number)
+    results.append(str(index))
 
-
-if __name__ == "__main__":
-    main()
+with open("output4.txt", "w") as outfile:
+    outfile.write(" ".join(results))
