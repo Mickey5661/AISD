@@ -25,10 +25,9 @@ def heap_sort(arr):
 
     # Извлечение элементов из кучи
     for i in range(n - 1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]  # Перемещение текущего корня в конец
+        arr[i], arr[0] = arr[0], arr[i]
         max_heapify(arr, i, 0)
 
-    # Инвертирование массива для убывающего порядка
     arr.reverse()
 
 with open('input7.txt', 'r') as file:
