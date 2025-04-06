@@ -5,11 +5,10 @@ with open("input12.txt", "r") as file:
     n, m = map(int, file.readline().split())
     commands = [line.strip().split() for line in file]
 
-# Используем OrderedDict для хранения порядка в строю
+# OrderedDict для хранения порядка в строю
 recruits = OrderedDict()
-recruits[1] = [None, None]  # Первый новобранец
+recruits[1] = [None, None]
 
-# Обработчик команд
 output = []
 
 for command in commands:
