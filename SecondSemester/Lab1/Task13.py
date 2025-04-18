@@ -12,8 +12,7 @@ def can_partition_into_three_subsets(nums):
     target = total_sum // 3
     n = len(nums)
 
-    # dp[i
-    # ][j] будет True, если можно получить сумму j, используя первые i элементов
+    # dp[i][j] будет True, если можно получить сумму j, используя первые i элементов
     dp = [[False] * (target + 1) for _ in range(n + 1)]
     dp[0][0] = True
 
@@ -25,11 +24,8 @@ def can_partition_into_three_subsets(nums):
 
     return 1 if dp[n][target] else 0
 
-
-# Запуск таймера
 start_time = time.perf_counter()
 
-# Чтение входных данных из файла
 with open('input13.txt', 'r') as file:
     lines = file.readlines()
 
@@ -40,32 +36,15 @@ with open('input13.txt', 'r') as file:
     # Чтение количества чисел
     n = int(lines[0].strip())
 
-    # Проверка, что количество чисел больше нуля и не превышает 20
-    # if n == 0:
-    #     raise ValueError("Количество чисел должно быть больше нуля.")
-    # if n > 20:
-    #     raise ValueError("Количество чисел не должно превышать 20.")
-
     # Чтение чисел и преобразование их в список целых чисел
     nums = list(map(int, lines[1].strip().split()))
-
-    # Проверка, что количество чисел соответствует указанному значению n
-    # if len(nums) != n:
-    #     raise ValueError("Количество чисел не соответствует указанному значению.")
-
-    # Проверка, что все числа в диапазоне от 1 до 30
-    # for num in nums:
-    #     if num < 1 or num > 30:
-    #         raise ValueError(f"Число {num} выходит за пределы допустимого диапазона (1-30).")
 
 # Проверка возможности разделить на три подмножества с одинаковыми суммами
 result = can_partition_into_three_subsets(nums)
 
-# Запись результата в файл
 with open('output13.txt', 'w') as file:
     file.write(str(result))
 
-# Остановка таймера и вывод времени выполнения
 end_time = time.perf_counter()
 execution_time = end_time - start_time
 print(f"Время выполнения: {execution_time:.6f} секунд")
