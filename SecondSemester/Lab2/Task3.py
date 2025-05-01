@@ -1,3 +1,6 @@
+import time
+import tracemalloc
+
 class Node:
     def __init__(self, key):
         self.key = key
@@ -18,7 +21,6 @@ class BST:
             node.left = self._insert(node.left, key)
         elif key > node.key:
             node.right = self._insert(node.right, key)
-        # если key == node.key, ничего не делаем
         return node
 
     def next_greater(self, key):
@@ -35,13 +37,17 @@ class BST:
         return result
 
 def main():
-    import sys
     input_file = 'input3.txt'
     output_file = 'output3.txt'
 
     bst = BST()
     results = []
 
+    # Запуск замеров
+    tracemalloc.start()
+    start_time = time.perf_counter()
+
+    # Обработка входных данных
     with open(input_file, 'r') as fin:
         for line in fin:
             if line.startswith('+'):
@@ -51,8 +57,19 @@ def main():
                 x = int(line[2:])
                 results.append(str(bst.next_greater(x)))
 
+    # Завершение замеров
+    end_time = time.perf_counter()
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    # Запись результата
     with open(output_file, 'w') as fout:
         fout.write('\n'.join(results))
+
+    # Вывод в консоль
+    print(f"Время выполнения: {end_time - start_time:.6f} секунд")
+    print(f"Использовано памяти: {current / 1024:.2f} KB")
+    print(f"Пиковое использование памяти: {peak / 1024:.2f} KB")
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,7 @@
 import sys
+import time
+import tracemalloc
+
 sys.setrecursionlimit(1_000_000)
 
 class Node:
@@ -37,7 +40,6 @@ def small_left_rotate(a):
 def big_left_rotate(a):
     b = a.right
     c = b.left
-
     b.left = c.right
     a.right = c.left
     c.left = a
@@ -71,6 +73,10 @@ def serialize(root):
     return result[::-1]
 
 def main():
+    # Запуск измерений
+    tracemalloc.start()
+    start_time = time.perf_counter()
+
     with open("input13.txt", "r") as fin:
         n = int(fin.readline())
         data = [tuple(map(int, fin.readline().split())) for _ in range(n)]
@@ -83,6 +89,16 @@ def main():
         fout.write(f"{len(output)}\n")
         for k, l, r in output:
             fout.write(f"{k} {l} {r}\n")
+
+    # Завершение измерений
+    end_time = time.perf_counter()
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    # Вывод в консоль
+    print(f"Время выполнения: {end_time - start_time:.6f} секунд")
+    print(f"Использовано памяти: {current / 1024:.2f} KB")
+    print(f"Пиковое использование памяти: {peak / 1024:.2f} KB")
 
 if __name__ == "__main__":
     main()

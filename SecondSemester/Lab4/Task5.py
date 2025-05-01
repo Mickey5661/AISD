@@ -1,3 +1,6 @@
+import time
+import tracemalloc
+
 def compute_prefix_function(s):
     n = len(s)
     prefix = [0] * n
@@ -10,11 +13,31 @@ def compute_prefix_function(s):
         prefix[i] = j
     return prefix
 
-with open("input5.txt", "r") as file:
-    s = file.readline().strip()
+def main():
+    # Запуск замеров
+    tracemalloc.start()
+    start_time = time.perf_counter()
 
-# Вычисление префикс-функции
-prefix_values = compute_prefix_function(s)
+    # Чтение строки
+    with open("input5.txt", "r") as file:
+        s = file.readline().strip()
 
-with open("output5.txt", "w") as file:
-    file.write(''.join(map(str, prefix_values)))
+    # Вычисление префикс-функции
+    prefix_values = compute_prefix_function(s)
+
+    # Запись результата
+    with open("output5.txt", "w") as file:
+        file.write(''.join(map(str, prefix_values)))
+
+    # Завершение замеров
+    end_time = time.perf_counter()
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    # Вывод статистики
+    print(f"Время выполнения: {end_time - start_time:.6f} секунд")
+    print(f"Использовано памяти: {current / 1024:.2f} KB")
+    print(f"Пиковое использование памяти: {peak / 1024:.2f} KB")
+
+if __name__ == "__main__":
+    main()

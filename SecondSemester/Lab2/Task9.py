@@ -1,7 +1,8 @@
 import sys
+import time
+import tracemalloc
 
 sys.setrecursionlimit(1_000_000)
-
 
 class Node:
     def __init__(self, key):
@@ -10,7 +11,6 @@ class Node:
         self.right = None
         self.size = 1
         self.parent = None
-
 
 def build_tree(nodes_info):
     nodes = [None]
@@ -37,7 +37,6 @@ def build_tree(nodes_info):
     compute_sizes(nodes[1])
     return nodes[1]
 
-
 def find_node(root, key):
     node = root
     while node:
@@ -48,7 +47,6 @@ def find_node(root, key):
         else:
             return node
     return None
-
 
 def delete_subtree(node):
     if not node:
@@ -62,8 +60,11 @@ def delete_subtree(node):
             parent.right = None
     return size
 
-
 def main():
+    # Старт измерений
+    tracemalloc.start()
+    start_time = time.perf_counter()
+
     with open('input9.txt', 'r') as fin:
         n = int(fin.readline())
         nodes_info = [tuple(map(int, fin.readline().split())) for _ in range(n)]
@@ -84,6 +85,15 @@ def main():
     with open('output9.txt', 'w') as fout:
         fout.write('\n'.join(result))
 
+    # Завершение измерений
+    end_time = time.perf_counter()
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    # Вывод статистики
+    print(f"Время выполнения: {end_time - start_time:.6f} секунд")
+    print(f"Использовано памяти: {current / 1024:.2f} KB")
+    print(f"Пиковое использование памяти: {peak / 1024:.2f} KB")
 
 if __name__ == "__main__":
     main()
